@@ -1,0 +1,29 @@
+<!-- websockets.html -->
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+      <title>Document</title>
+  </head>
+</html>
+
+<script>
+    let socket = new WebSocket("ws://localhost:8080/echo");
+    socket.onopen = function () {
+        socket.send("get header");
+    };
+
+    socket.onmessage = function (e) {
+        let body = JSON.parse(e.data);
+        document.body.innerHTML = body.body;
+
+      // let scriptTag = document.createElement('script');
+      // scriptTag.text= "console.log(\"test\");";
+      // document.body.appendChild(scriptTag);
+    };
+
+</script>
